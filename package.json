@@ -11,13 +11,17 @@
     "type": "git",
     "url": "git+https://github.com/team-vinu/works-db.git"
   },
-  "author": ["uedo", "viterum"],
+  "author": [
+    "uedo",
+    "viterum"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/team-vinu/works-db/issues"
   },
   "homepage": "https://github.com/team-vinu/works-db#readme",
   "devDependencies": {
+    "prettier": "^2.5.1",
     "ts-node": "^10.5.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.5"
