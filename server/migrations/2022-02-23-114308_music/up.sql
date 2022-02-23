@@ -2,7 +2,7 @@
 CREATE TABLE music
 ("id" UUID UNIQUE,
 "name" TEXT NOT NULL,
-"aritist" TEXT,
+"artist" TEXT,
 "release_date" DATE,
 "apple_music_url" TEXT,
 "spotify_url" TEXT,
