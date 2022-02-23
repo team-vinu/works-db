@@ -2,13 +2,13 @@
 
 ## Installation
 
-### Pre-requirement:
+### Pre-requirements:
 
 -   Rust (cargo)
 -   nodejs (recommended via nvm)
 -   Postgresql
 
-### Run below command:
+### Run below commands:
 
 ```bash
 $ nvm use
