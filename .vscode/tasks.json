@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "test-rs",
+			"problemMatcher": [],
+			"label": "npm: test-rs",
+			"detail": "cd server && cargo run"
+		}
+	]
+}
