@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsnd --respawn src/main.ts",
-    "build": "tsc"
+    "build": "npm run build-ts && npm run build-rs",
+    "build-ts": "tsc",
+    "build-rs": "cd server && cargo build --release"
   },
   "repository": {
     "type": "git",
