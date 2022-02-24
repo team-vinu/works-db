@@ -1,4 +1,8 @@
-import { style, keyframes } from "@vanilla-extract/css"
+import {
+    style,
+    keyframes,
+    globalStyle
+} from "@vanilla-extract/css"
 
 export const app = style({
     textAlign: "center",
@@ -23,3 +27,22 @@ export const appLogo = style({
         }
     },
 });
+
+export const appHeader = style({
+    backgroundColor: "#282c34",
+    minHeight: "100vh",
+    display: `flex`,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "calc(10px + 2vmin)",
+    color: "white",
+})
+
+export const appLink = style({
+    color: "#61dafb",
+})
+
+globalStyle("button", {
+    fontSize: "calc(10px + 2vmin)"
+})
