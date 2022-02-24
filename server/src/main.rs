@@ -2,14 +2,16 @@
 extern crate diesel;
 extern crate dotenv;
 
+use chrono::NaiveDate;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use dotenv::dotenv;
+use serde::{Deserialize, Serialize};
 use std::env;
 use uuid::Uuid;
 
 mod models;
-use models::Music;
+use crate::models::*;
 
 mod schema;
 use schema::music::dsl::*;
@@ -24,8 +26,8 @@ fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-#[get("/api/musics")]
-async fn get_musics() -> impl Responder {
+#[get("/api/music")]
+async fn get_music() -> impl Responder {
     let conn = establish_connection();
     let results = music.load::<Music>(&conn).expect("Error loading music");
     return HttpResponse::Ok().body(format!("{:?}", results));
@@ -33,7 +35,7 @@ async fn get_musics() -> impl Responder {
 
 // FIXME:
 #[post("/api/music")]
-async fn echo(req: web::Json<Music>) -> impl Responder {
+async fn echo(req: web::Json<Music_info>) -> impl Responder {
     let conn = establish_connection();
     let new_music = Music {
         id: Uuid::new_v4(),
@@ -46,14 +48,13 @@ async fn echo(req: web::Json<Music>) -> impl Responder {
         songlink_url: req.songlink_url.clone(),
         note: req.note.clone(),
     };
-    println!("{:?}", req);
-    //diesel::insert_into(music).values(&new_music).execute(&conn);
+    diesel::insert_into(music).values(&new_music).execute(&conn);
     return HttpResponse::Ok().body(format!("{:?}", req));
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    return HttpServer::new(|| App::new().service(get_musics).service(echo))
+    return HttpServer::new(|| App::new().service(get_music).service(echo))
         .bind("127.0.0.1:8080")?
         .run()
         .await;
