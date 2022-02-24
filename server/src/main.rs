@@ -34,7 +34,7 @@ async fn get_music() -> impl Responder {
 }
 
 #[post("/api/music")]
-async fn echo(req: web::Json<Music_info>) -> impl Responder {
+async fn post_music(req: web::Json<Music_info>) -> impl Responder {
     let conn = establish_connection();
     let new_music = Music {
         id: Uuid::new_v4(),
@@ -47,13 +47,16 @@ async fn echo(req: web::Json<Music_info>) -> impl Responder {
         songlink_url: req.songlink_url.clone(),
         note: req.note.clone(),
     };
-    diesel::insert_into(music).values(&new_music).execute(&conn);
+    diesel::insert_into(music)
+        .values(&new_music)
+        .execute(&conn)
+        .unwrap();
     return HttpResponse::Ok().body(format!("{:?}", req));
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    return HttpServer::new(|| App::new().service(get_music).service(echo))
+    return HttpServer::new(|| App::new().service(get_music).service(post_music))
         .bind("127.0.0.1:8080")?
         .run()
         .await;
