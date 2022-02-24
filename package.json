@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build-ts && npm run build-rs",
-    "build-ts": "vue-tsc --noEmit && vite build",
+    "build-ts": "tsc && vite build",
     "build-rs": "cd server && cargo build --release",
     "test-rs": "cd server && cargo run --release",
     "test": "run-p test-rs preview",
