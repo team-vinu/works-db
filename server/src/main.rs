@@ -33,7 +33,6 @@ async fn get_music() -> impl Responder {
     return HttpResponse::Ok().body(format!("{:?}", results));
 }
 
-// FIXME:
 #[post("/api/music")]
 async fn echo(req: web::Json<Music_info>) -> impl Responder {
     let conn = establish_connection();
