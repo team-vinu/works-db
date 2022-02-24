@@ -26,7 +26,7 @@ fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-#[get("/api/music")]
+#[get("/api/musics")]
 async fn get_music() -> impl Responder {
     let conn = establish_connection();
     let results = music.load::<Music>(&conn).expect("Error loading music");
