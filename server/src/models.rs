@@ -18,7 +18,7 @@ pub struct Music {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
-pub struct Music_info {
+pub struct MusicInfo {
     pub name: String,
     pub artist: Option<String>,
     pub release_date: Option<NaiveDate>,
@@ -28,3 +28,5 @@ pub struct Music_info {
     pub songlink_url: Option<String>,
     pub note: Option<String>,
 }
+
+
