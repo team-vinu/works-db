@@ -1,283 +1,458 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
-// Quartz 5.1.3
+// Morph 5.1.3
 // Bootswatch
 
 
 // Variables
 
-$body-bg-image: linear-gradient(90deg, shade-color($cyan, 10%), shade-color($purple, 10%), shade-color($pink, 5%)) !default;
-$frosted-opacity: .3 !default;
+$web-font-path: "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" !default;
+@if $web-font-path {
+  @import url($web-font-path);
+}
 
-@mixin glass($opacity: $frosted-opacity, $bg: $white) {
+$btn-box-shadow-inset: inset 2px 3px 6px rgba($black, .2), inset -3px -2px 6px rgba($white, .2) !default;
+
+@mixin shadow($shadow: $box-shadow) {
+  background-color: $gray-200;
   border: none;
-  box-shadow: inset 1px 1px $border-color, inset -1px -1px rgba($white, .1), $box-shadow;
-  @include frost($opacity, $bg);
-
-  a {
-    color: $card-color;
-  }
-
-  .text-muted {
-    color: rgba($card-color, .7) !important;
-  }
+  box-shadow: $shadow;
+  transition: background-color .15s ease-in-out, border .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 }
 
-@mixin frost($opacity: $frosted-opacity, $bg: $white) {
-  background-color: transparent;
-  background-image: linear-gradient(125deg, rgba($bg, ($opacity)), rgba($bg, ($opacity - .1)) 70%);
-  backdrop-filter: blur(5px);
-}
-
-// Body
-
-body {
-  background-image: $body-bg-image;
-}
-
-// Tables
-
-.table-secondary {
-  --bs-table-hover-color: $white;
+@mixin shadow-outline($shadow: $box-shadow) {
+  content: "";
+  position: absolute;
+  left: -.5rem;
+  right: -.5rem;
+  top: -.5rem;
+  bottom: -.5rem;
+  background-color: $body-bg;
+  border: 1px solid rgba($white, .1);
+  box-shadow: $shadow;
+  transition: background-color .15s ease-in-out, border .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
+  z-index: -1;
 }
 
 // Buttons
 
 .btn {
-  &-secondary {
-    border: none;
-    color: $white;
-
-    &:hover,
-    &:focus {
-      color: $white;
-    }
-
-    &.disabled {
-      color: $white;
-    }
-  }
-}
-
-.btn-group > .btn:not(:first-child),
-.btn-group > .btn-group:not(:first-child) {
-  margin-left: 0;
-}
-
-.btn-group-vertical > .btn:not(:first-child),
-.btn-group-vertical > .btn-group:not(:first-child) {
-  margin-top: 0;
-}
-
-.bg-light .btn {
-  background-color: rgba($black, .2);
-}
-
-// Forms
-
-.input-group-text,
-.form-control::-webkit-file-upload-button {
-  background-color: transparent;
-  background-image: linear-gradient(125deg, rgba($white, .3), rgba($white, .2) 70%);
-  border: none;
-  backdrop-filter: blur(5px);
-}
-
-.input-group-text {
-  box-shadow: inset 1px 1px $border-color, inset -1px -1px rgba($white, .1);
-}
-
-.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  margin-left: 0;
-  border-left: none;
-}
-
-.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
-.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n + 3) {
-  border-right: none;
-}
-
-.form-select:not([multiple]) {
-  transition: border-color .15s ease-in-out;
-
-  option {
-    color: $black;
-  }
-}
-
-.bg-light .form-control {
-  border-color: rgba($black, .2);
-  color: $gray-800;
-
-  &::placeholder {
-    color: rgba($black, .2);
-  }
-}
-
-// Navs
-
-.dropdown-menu {
-  @include glass(.3);
-}
-
-.nav-tabs {
-  .nav-link {
-    transition: none;
-
-    &:hover,
-    &:focus {
-      color: $white;
-      isolation: auto;
-    }
-
-    &,
-    &.disabled {
-      background-color: $progress-bg;
-    }
-  }
-
-  .nav-item:first-child > .nav-link {
-    border-radius: $border-radius 0 0 $border-radius;
-  }
-
-  .nav-item:last-child > .nav-link {
-    border-radius: 0 $border-radius $border-radius 0;
-  }
-
-  .nav-item .nav-link.active,
-  .nav-item.show .nav-link {
-    @include glass(1, $white);
-    border-radius: $border-radius;
-    transform: scale(1.1);
-
-    &:hover,
-    &:focus {
-      color: $gray-800;
-    }
-  }
-
-  .dropdown-menu {
-    border-radius: $border-radius;
-  }
-}
-
-.nav-pills {
-  .nav-link {
-    transition: none;
-
-    &:hover,
-    &:focus {
-      color: $white;
-      isolation: auto;
-    }
-  }
-}
-
-// Indicators
-
-.alert {
-  @include glass();
   position: relative;
-  overflow: hidden;
-  color: $white;
+  color: $gray-700;
+  border-radius: $btn-border-radius;
+  @include shadow();
+
+  &:focus {
+    color: $gray-700;
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    @include shadow();
+    color: $gray-700;
+  }
+
+  &:active,
+  &:active:focus {
+    border-color: transparent;
+    box-shadow: $btn-box-shadow-inset;
+  }
 
   @each $color, $value in $theme-colors {
-    $opacity: .7;
-    &-#{$color}::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: .5rem;
-      height: 100%;
-      background-color: $value;
-    }
-  }
+    &-#{$color} {
 
-  .alert-link {
-    color: $card-color;
-  }
-}
-
-.badge {
-  &.bg-secondary {
-    --bs-bg-opacity: .4;
-  }
-
-  &.bg-light {
-    color: $gray-800;
-  }
-}
-
-// Containers
-
-.list-group {
-  @include glass();
-}
-
-.card {
-  @include glass();
-
-  @each $color, $value in $theme-colors {
-    @if ($color == secondary) {
-      --bs-secondary-rgb: transparent;
-    } @else {
-      &.bg-#{$color} {
-        background-image: none;
-      }
-    }
-  }
-
-  &.bg-light {
-    .card-header,
-    .card-body {
-      color: $gray-800;
-    }
-  }
-
-  &.border {
-    @each $color, $value in $theme-colors {
-      &-#{$color} {
-        @include glass();
-
-        .card-header {
-          background-color: $value !important;
-          border-bottom: none;
-
-          @if ($color == light) {
-            color: $gray-800;
-          }
+      &:active,
+      &:active:focus {
+        @if ($color == secondary or $color == light) {
+          background-color: $gray-200;
+          color: $gray-700;
+        } @else {
+          background-color: $value;
+          color: $white;
         }
       }
     }
   }
 
-  &-header {
-    font-weight: $headings-font-weight;
+  &-link {
+    font-weight: $btn-font-weight;
+
+    &:hover,
+    &:active,
+    &:active:focus {
+      color: $dark;
+    }
+  }
+
+  &.disabled {
+    background-color: $gray-200;
+    box-shadow: 2px 2px 5px rgba($black, .1), -2px -2px 5px rgba($white, .5);
+    color: $gray-700;
   }
 }
 
-.accordion-item {
-  @include glass();
-  box-shadow: none;
+.btn-outline {
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      background-color: $value;
+      box-shadow: 5px 5px 10px rgba($black, .2), -5px -5px 10px rgba($white, .1);
+      border: none;
+
+      @if ($color == secondary or $color == light) {
+        color: $gray-700;
+      } @else {
+        color: $white;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $value;
+        border: none;
+        box-shadow: 5px 5px 10px rgba($black, .2), -5px -5px 10px rgba($white, .1);
+
+        @if ($color == secondary or $color == light) {
+          color: $gray-700;
+        } @else {
+          color: $white;
+        }
+      }
+
+      &:active,
+      &:active:focus {
+        background-color: $value;
+        border: none;
+        box-shadow: inset 2px 3px 6px rgba($black, .1), inset -3px -2px 6px rgba($white, .1);
+
+        @if ($color == secondary or $color == light) {
+          color: $gray-700;
+        } @else {
+          color: $white;
+        }
+      }
+    }
+  }
 }
 
-.toast {
-  @include glass();
+.btn-group,
+.btn-group-vertical {
+  @include shadow();
+  border-radius: $btn-border-radius;
+  border: none;
+
+  .btn,
+  .btn-group {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:active:focus {
+      border: none;
+    }
+  }
 }
 
-.popover {
-  @include glass();
+.btn-group {
 
-  &-header {
-    border-bottom-color: $border-color;
+  > .btn:nth-child(n + 3),
+  > :not(.btn-check) + .btn,
+  > .btn-group:not(:first-child) > .btn {
+    border-left: 1px solid $border-color;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    &:hover,
+    &:active,
+    &:active:focus {
+      border-left: 1px solid $border-color;
+    }
+  }
+
+  > .btn:not(:last-child):not(.dropdown-toggle),
+  > .btn-group:not(:last-child) > .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.btn-group-vertical {
+  border-radius: 1rem;
+
+  .btn {
+    border-radius: 1rem;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:active:focus {
+      border-radius: 1rem;
+    }
+  }
+
+  > .btn:nth-child(n + 3),
+  > :not(.btn-check) + .btn,
+  > .btn-group:not(:first-child) > .btn {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 1px solid rgba($black, .05);
+
+    &:hover,
+    &:active,
+    &:active:focus {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: 1px solid rgba($black, .05);
+    }
+  }
+
+  > .btn:not(:last-child):not(.dropdown-toggle),
+  > .btn-group:not(:last-child) > .btn {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &:hover,
+    &:active,
+    &:active:focus {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.btn-check:checked + .btn,
+.btn-check:active + .btn {
+  box-shadow: inset 2px 3px 6px rgba($black, .2);
+
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      background-color: $value;
+
+      .btn-check:checked + &,
+      .btn-check:active + & {
+        @if $color == secondary {
+          color: $gray-700;
+        } @else {
+          color: $value;
+        }
+      }
+    }
+  }
+}
+
+.btn-check:not(:checked) + .btn,
+.btn-check:not(:checked) + .btn:active {
+  background-color: $gray-200;
+  color: $gray-700;
+}
+
+.btn-check:checked ~ .btn-check:active + .btn,
+.btn-check:checked ~ .btn-check:checked + .btn {
+  box-shadow: inset 0 3px 6px rgba($black, .2);
+}
+
+// Navs
+
+.dropdown-menu {
+  backdrop-filter: blur(3px);
+}
+
+.nav-tabs {
+  @include shadow();
+  border-radius: $border-radius;
+
+  .nav-item {
+    box-shadow: 1px 0 $border-color;
+
+    &:first-child .nav-link {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-child .nav-link {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    box-shadow: inset 0 3px 6px rgba($black, .2);
+  }
+}
+
+.nav-pills {
+  @include shadow();
+  padding: 1rem;
+  border-radius: $border-radius;
+
+
+  .nav-link.active {
+    box-shadow: inset 0 3px 6px rgba($black, .2);
+  }
+}
+
+.breadcrumb {
+  @include shadow();
+  border-radius: $border-radius;
+}
+
+.pagination {
+  @include shadow();
+  justify-content: center;
+  border-radius: $border-radius;
+}
+
+// Forms
+
+.input-group {
+  background-color: $gray-100;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-inset;
+
+  > .form-control {
+    background: none;
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: none;
+  }
+
+  .input-group-text {
+    background: none;
+  }
+}
+
+.form-range {
+  &::-webkit-slider-runnable-track {
+    box-shadow: inset 1px 1px 4px rgba($black, .15);
+  }
+
+  &::-webkit-slider-thumb,
+  &:focus::-webkit-slider-thumb {
+    box-shadow: 1px 1px 3px rgba($black, .2), inset 2px 2px 8px rgba(shade-color($form-range-thumb-bg, 50%), .1);
+  }
+}
+
+.form-check-input {
+  background-color: $gray-400;
+  border: none;
+  box-shadow: inset 1px 1px 7px rgba($black, .2);
+
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+
+  &:active {
+    filter: none;
+  }
+
+  &:checked {
+    background-color: $primary;
+    box-shadow: inset 1px 1px 7px rgba($black, .2);
+  }
+}
+
+.form-control {
+  &::-webkit-file-upload-button {
+    box-shadow: 2px 2px 5px rgba($black, .2), inset 3px 3px 10px rgba(shade-color($form-range-thumb-bg, 50%), .1);
+  }
+}
+
+.form-select:not([multiple]) {
+  position: relative;
+  box-shadow: $box-shadow;
+}
+
+// Indicators
+
+.alert {
+  box-shadow: $dropdown-box-shadow;
+  backdrop-filter: blur(3px);
+
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      background-color: rgba($value, .75);
+      box-shadow: $box-shadow-lg, inset 1px 1px 3px rgba(tint-color($value, 80%), .4), inset -5px -5px 20px rgba(shade-color($value, 80%), .05);
+    }
+  }
+}
+
+.badge {
+  &.bg-secondary,
+  &.bg-light {
+    color: $gray-700;
   }
 }
 
 .tooltip {
-  backdrop-filter: blur(5px);
+  &.show {
+    opacity: 1;
+  }
+
+  &-inner,
+  .arrow {
+    box-shadow: $dropdown-box-shadow;
+    backdrop-filter: blur(3px);
+  }
 }
 
+.popover,
+.toast,
 .modal-content {
-  @include glass();
+  box-shadow: $dropdown-box-shadow;
+  backdrop-filter: blur(3px);
 }
 
+.progress {
+  box-shadow: inset 2px 4px 6px rgba(shade-color($body-bg, 50%), .2), inset -3px -2px 5px rgba($white, .8);
+}
+
+.progress-bar {
+  box-shadow: 2px 2px 5px rgba($black, .2);
+
+  &:first-child {
+    border-top-left-radius: $border-radius-pill;
+    border-bottom-left-radius: $border-radius-pill;
+  }
+
+  &:last-child {
+    border-top-right-radius: $border-radius-pill;
+    border-bottom-right-radius: $border-radius-pill;
+  }
+}
+
+// Containers
+
+.card {
+  box-shadow: inset 2px 2px 6px rgba(shade-color($body-bg, 50%), .2), inset -3px -2px 4px rgba($white, .2);
+
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      box-shadow: inset 2px 2px 6px  rgba(shade-color($value, 80%), .05), inset -3px -2px 4px rgba(tint-color($value, 80%), .2);
+    }
+  }
+
+  &-header {
+    border-bottom: 1px solid $border-color;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: inherit;
+  }
+}
+
+.list-group {
+  background-color: $card-bg;
+  box-shadow: inset 2px 2px 6px rgba(shade-color($body-bg, 50%), .2), inset -3px -2px 4px rgba($white, .2);
+}
+
+.list-group-item {
+  background-color: transparent;
+}
