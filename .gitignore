@@ -1,5 +1,1 @@
-/node_modules
-/db
-/dist
-/server/target
-/server/.env
+db
