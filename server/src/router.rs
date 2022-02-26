@@ -48,7 +48,7 @@ async fn post_music(req: web::Json<MusicInfo>) -> impl Responder {
     return HttpResponse::Ok().body(format!("{:?}", req));
 }
 
-#[get("/api/music/{id}")]
+#[get("/api/music/#{id}")]
 async fn get_music(path: web::Path<(Uuid)>) -> impl Responder {
     let conn = establish_connection();
     let result = music
