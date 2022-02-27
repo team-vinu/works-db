@@ -1,5 +1,4 @@
-import { Image, Container, Circle, Text } from "@chakra-ui/react"
-import { UserOutlined } from "@ant-design/icons";
+import { Image, Container, Text } from "@chakra-ui/react"
 
 type Props = {
     key: number,
