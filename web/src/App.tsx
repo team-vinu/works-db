@@ -1,8 +1,10 @@
 import { useState } from "react";
 import SearchForm from "./components/Search-form";
 import Card from "./components/Card";
-import { Image, Text, Box, Button, ChakraProvider, Heading, Input, HStack, Icon, Center, Container } from "@chakra-ui/react";
+import { Image, Text, Box, Button, ChakraProvider, Heading, Input, HStack, Icon, Center, Container, styled, Circle } from "@chakra-ui/react";
 import { UserOutlined } from "@ant-design/icons";
+import user from "../node_modules/@ant-design/icons-svg/inline-svg/outlined/user.svg";
+import CreatorListItem from "./components/Creator-list-item";
 
 function App() {
     return (
@@ -23,10 +25,10 @@ function App() {
                             const items = [];
                             for(let i = 0; i < 10; i++) {
                                 items.push(
-                                    <Container centerContent key={i} p="0">
-                                        <Icon as={UserOutlined}/>
-                                        <Text>creator</Text>
-                                    </Container>
+                                    <CreatorListItem
+                                        key={i}
+                                        name="creator"
+                                    />
                                 );
                             }
                             return items;
