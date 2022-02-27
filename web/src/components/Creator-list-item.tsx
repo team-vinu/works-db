@@ -1,10 +1,10 @@
-import React from "react";
-import { Container, Circle, Text } from "@chakra-ui/react"
+import { Image, Container, Circle, Text } from "@chakra-ui/react"
 import { UserOutlined } from "@ant-design/icons";
 
 type Props = {
     key: number,
     name: string,
+    img: string,
 };
 
 const CreatorListItem = (props: Props): JSX.Element => {
@@ -14,11 +14,11 @@ const CreatorListItem = (props: Props): JSX.Element => {
             key={ props.key }
             p="0"
         >
-            <Circle>
-                <UserOutlined
-                    style={{fontSize: "100px"}}
-                />
-            </Circle>
+            <Image
+                src={ props.img }
+                borderRadius="full"
+                border="1px"
+            />
             <Text>{ props.name }</Text>
         </Container>
     );
