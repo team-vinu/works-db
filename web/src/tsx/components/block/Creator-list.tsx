@@ -22,7 +22,7 @@ const CreatorList = (props: Props) : JSX.Element => {
                     for(let i = 0; i < props.creatorPropsArray.length; i++) {
                         items.push(
                             <CreatorListItem
-                                key={ i }
+                                key={ i.toString() }
                                 name={ props.creatorPropsArray[i].name }
                                 img={ props.creatorPropsArray[i].img }
                             />
