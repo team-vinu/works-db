@@ -1,7 +1,7 @@
 import { Image, Container, Text } from "@chakra-ui/react"
 
 type Props = {
-    key: number,
+    key: string,
     name: string,
     img: string,
 };
