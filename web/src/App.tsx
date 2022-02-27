@@ -1,12 +1,20 @@
 import { useState } from "react";
-import SearchForm from "./components/Search-form";
-import Card from "./components/Card";
 import { Image, Text, Box, Button, ChakraProvider, Heading, Input, HStack, Icon, Center, Container, styled, Circle } from "@chakra-ui/react";
 import { UserOutlined } from "@ant-design/icons";
-import user from "../node_modules/@ant-design/icons-svg/inline-svg/outlined/user.svg";
 import CreatorListItem from "./components/Creator-list-item";
+import UserIcon from "./images/user.png"
+import CreatorList, { CreatorProps } from "./components/Creator-list";
 
 function App() {
+    const pickupCreators: CreatorProps[] = [];
+    for(let i = 0; i < 10; i++) {
+        const creator: CreatorProps = {
+            name: "creator",
+            img: UserIcon,
+        };
+        pickupCreators.push(creator)
+    }
+
     return (
         <ChakraProvider>
             <Box m="4">
@@ -18,23 +26,10 @@ function App() {
                     </Box>
                 </Box>
 
-                <Box mb="4">
-                    <Heading as="h2" size="sm">ピックアップ</Heading>
-                    <HStack overflow="scroll">
-                        {(() => {
-                            const items = [];
-                            for(let i = 0; i < 10; i++) {
-                                items.push(
-                                    <CreatorListItem
-                                        key={i}
-                                        name="creator"
-                                    />
-                                );
-                            }
-                            return items;
-                        })()}
-                    </HStack>
-                </Box>
+                <CreatorList
+                    title="ピックアップ"
+                    creatorPropsArray={ pickupCreators }
+                />
             </Box>
         </ChakraProvider>
         /*

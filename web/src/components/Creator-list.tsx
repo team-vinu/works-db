@@ -2,7 +2,7 @@ import React from "react";
 import { Heading, Box, HStack, Container, Circle, Text } from "@chakra-ui/react"
 import CreatorListItem from "./Creator-list-item";
 
-type CreatorProps = {
+export type CreatorProps = {
     name: string,
     img: string,
 }
@@ -15,7 +15,7 @@ type Props = {
 const CreatorList = (props: Props) : JSX.Element => {
     return (
         <Box>
-            <Heading as="h2" size="sm">props.title</Heading>
+            <Heading as="h2" size="sm">{ props.title }</Heading>
             <HStack overflow="scroll">
                 {(() => {
                     const items = [];
@@ -24,6 +24,7 @@ const CreatorList = (props: Props) : JSX.Element => {
                             <CreatorListItem
                                 key={ i }
                                 name={ props.creatorPropsArray[i].name }
+                                img={ props.creatorPropsArray[i].img }
                             />
                         );
                     }
