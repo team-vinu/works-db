@@ -6,7 +6,7 @@ import {
     Input 
 } from "@chakra-ui/react";
 import CreatorList, { CreatorProps } from "../components/block/Creator-list";
-import UserIcon from "../../images/user.png"
+import UserIcon from "../../../images/user.png"
 
 function Home() {
     const pickupCreators: CreatorProps[] = [];
