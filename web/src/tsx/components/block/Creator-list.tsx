@@ -1,5 +1,8 @@
-import React from "react";
-import { Heading, Box, HStack, Container, Circle, Text } from "@chakra-ui/react"
+import { 
+    Heading, 
+    Box, 
+    HStack
+} from "@chakra-ui/react"
 import CreatorListItem from "../atoms/Creator-list-item";
 
 export type CreatorProps = {
