@@ -3,5 +3,5 @@
     "endOfLine": "lf",
     "useTabs": false,
     "semi": true,
-    "singleQuote":false
+    "singleQuote": true
 }
