@@ -1,10 +1,20 @@
-import { Box, Input, Button } from '@chakra-ui/react';
+import { InputLeftElement, InputGroup, Box, Input, Button } from '@chakra-ui/react';
+import { SearchOutlined } from '@ant-design/icons'
 
 const SearchBox = (): JSX.Element => {
     return (
         <Box display="flex">
-            <Input placeholder="キーワードを入力してください" mr="2" />
-            <Button>検索</Button>
+            <InputGroup>
+                <InputLeftElement
+                    pointerEvents='none'
+                    children={<SearchOutlined />}
+                />
+                <Input 
+                    placeholder="検索..." 
+                    mr="2"
+                    variant='flushed'
+                />
+            </InputGroup>
         </Box>
     );
 };
