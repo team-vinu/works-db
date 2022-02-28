@@ -8,9 +8,11 @@ const App = (): JSX.Element => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/preview" element={<Home />} /> {/* for debug */}
                 <Route path="/" element={<Home />} />
                 <Route path="/creator" element={<Creator />} />
+
+                {/* for debug */}
+                <Route path="/preview" element={<Home />} /> 
             </Routes>
         </BrowserRouter>
     );
