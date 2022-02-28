@@ -1,4 +1,9 @@
-import { Image, Container, Text } from "@chakra-ui/react"
+import { 
+    Image,
+    Container,
+    Text
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 type Props = {
     key: string,
@@ -8,18 +13,20 @@ type Props = {
 
 const CreatorListItem = (props: Props): JSX.Element => {
     return (
-        <Container
-            centerContent
-            key={ props.key }
-            p="0"
-        >
-            <Image
-                src={ props.img }
-                borderRadius="full"
-                border="1px"
-            />
-            <Text>{ props.name }</Text>
-        </Container>
+        <Link to={`/creator`}>
+            <Container
+                centerContent
+                key={ props.key }
+                p="0"
+            >
+                <Image
+                    src={ props.img }
+                    borderRadius="full"
+                    border="1px"
+                />
+                <Text>{ props.name }</Text>
+            </Container>
+        </Link>
     );
 };
 

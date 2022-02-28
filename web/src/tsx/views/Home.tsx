@@ -1,7 +1,10 @@
-import React from "react";
-import { useState } from "react";
-import { Image, Text, Box, Button, ChakraProvider, Heading, Input, HStack, Icon, Center, Container, styled, Circle } from "@chakra-ui/react";
-import CreatorListItem from "../components/atoms/Creator-list-item";
+import { 
+    Box,
+    Button,
+    ChakraProvider,
+    Heading,
+    Input 
+} from "@chakra-ui/react";
 import CreatorList, { CreatorProps } from "../components/block/Creator-list";
 import UserIcon from "../../images/user.png"
 
