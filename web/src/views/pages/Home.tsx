@@ -1,6 +1,6 @@
-import { Box, Button, ChakraProvider, Heading, Input } from '@chakra-ui/react';
+import { Box, ChakraProvider, Heading } from '@chakra-ui/react';
 import CreatorList, { CreatorProps } from '../components/block/Creator-list';
-import DefaultCreatorIcon from '../../../images/user.png';
+import DefaultCreatorIcon from '../../images/user.png';
 import SearchBox from '../components/atoms/Search-box';
 
 function Home() {
