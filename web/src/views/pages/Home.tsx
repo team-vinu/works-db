@@ -1,8 +1,9 @@
-import { Box, ChakraProvider, Heading } from '@chakra-ui/react';
-import SearchBox from '../components/atoms/Search-box';
-import CreatorList, { CreatorProps } from '../components/block/Creator-list';
+import { Image, Box, ChakraProvider, Heading, HStack } from '@chakra-ui/react';
+import SearchBox from '../components/Search-box';
+import CreatorList, { CreatorProps } from '../components/Creator-list';
 import theme from '../../styles/theme'
 import DefaultCreatorIcon from '../../images/user.png';
+import logo from '../../images/works-db-logo.png'
 
 function Home() {
     const pickupCreators: CreatorProps[] = [];
@@ -16,11 +17,14 @@ function Home() {
 
     return (
         <ChakraProvider theme={theme}>
-            <Box m="4">
+            <Box m="8">
                 <Box mb="4">
-                    <Heading as="h1" py="2">
-                        Works DB
-                    </Heading>
+                    <HStack maxH='xl'>
+                        <Image src={logo} boxSize='50px' />
+                        <Heading as="h1" py="2">
+                            Works DB
+                        </Heading>
+                    </HStack>
                     <SearchBox />
                 </Box>
 

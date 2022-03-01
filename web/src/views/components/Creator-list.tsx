@@ -1,12 +1,12 @@
 import { Heading, Box, HStack } from '@chakra-ui/react';
-import CreatorListItem from '../atoms/Creator-list-item';
+import CreatorListItem from './Creator-list-item';
 
-export type CreatorProps = {
+export interface CreatorProps {
     name: string;
     img: string;
 };
 
-type Props = {
+interface Props {
     title: string;
     creatorPropsArray: CreatorProps[];
 };
