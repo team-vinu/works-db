@@ -4,9 +4,34 @@ services:
   postgres:
     image: postgres:14.2
     restart: always
-    ports:
-      - 5433:5432
+    networks:
+      - db-tier
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+  web:
+    build: ./web
+    restart: always
+    volumes:
+      - ./web/dist:/app/dist
+  server:
+    build: ./server
+    restart: always
+    networks:
+      - db-tier
+      - back-tier
+    environment:
+      DATABASE_URL: postgres://postgres:5432
+  nginx:
+    build: ./nginx
+    restart: always
+    volumes:
+      - ./web/dist:/var/www/html
+    networks:
+      - back-tier
+    ports:
+      - 8080:80
+networks:
+  back-tier:
+  db-tier:
