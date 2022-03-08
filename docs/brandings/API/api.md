@@ -1,0 +1,41 @@
+# API docs
+
+## API endpoints: `/api`
+
+-   クリエイター名(+クリエイター役割)を指定して該当する曲のリストを表示
+    -   [ ] `GET /api/music/?creator=<creator-name>&role=<creator-role>`
+-   曲を DB に追加/削除
+    -   [x] 追加 `POST /api/music`
+        -   ```json
+            {
+                "name": "カレンダーガール",
+                "artist": "わか・ふうり・すなお from STAR☆ANIS",
+                "releaseDate": "2012-1-21",
+                "note": "TVアニメ「アイカツ！」1年目前期ED主題歌"
+            }
+            ```
+    -   [ ] 削除 `DELETE /api/music/{musicId}`
+    -   [x] 取得 `GET /api/music/{musicId}`
+-   クリエイターを追加/削除
+    -   [ ] 追加 `POST /api/creator/{creatorId}`
+    -   [ ] 削除 `DELETE /api/creator/{creatorId}`
+-   楽曲-クリエイター関係に関係を追加/削除
+    -   [ ] 追加 `POST /api/music/{musicId}/creator-relationship`
+    -   [ ] 削除 `DELETE /api/music/{musicId}/creator-relationship`
+-   クリエイター A の楽曲を一括追加
+    -   [ ] `POST /api/creator/{creatorId}`
+        -   ```json
+            {
+                "creatorName": "わか・ふうり・すなお from STAR☆ANIS", // creatorIdでも？
+                "data": [
+                    {
+                        "musicName": "カレンダーガール",
+                        "releaseDate": "2012-1-21",
+                        "note": "TVアニメ「アイカツ！」1年目前期ED主題歌"
+                    },
+                    {
+                        "musicName": "Signalize!"
+                    }
+                ]
+            }
+            ```
