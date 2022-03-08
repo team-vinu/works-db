@@ -26,6 +26,10 @@ services:
       - back-tier
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/example
+    depends_on:
+      - postgres
+    volumes:
+      - ./server:/server
   nginx:
     build: ./nginx
     restart: always
@@ -35,6 +39,8 @@ services:
       - back-tier
     ports:
       - 8080:80
+    depends_on:
+      - server
 networks:
   back-tier:
   db-tier:
