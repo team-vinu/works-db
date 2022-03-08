@@ -10,6 +10,6 @@ RUN rm -rf src/
 
 COPY . .
 
-RUN cargo build --release
+RUN cargo install --locked --path .
 
-CMD [ "cargo", "run", "--release" ]
+CMD [ "server" ]
