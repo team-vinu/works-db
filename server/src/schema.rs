@@ -31,8 +31,12 @@ table! {
     relation_creator_music (music_id) {
         music_id -> Uuid,
         creator_id -> Nullable<Uuid>,
-        creator_role -> Nullable<Text>,
+        creator_role -> Nullable<Array<Text>>,
     }
 }
 
-allow_tables_to_appear_in_same_query!(creator, music, relation_creator_music,);
+allow_tables_to_appear_in_same_query!(
+    creator,
+    music,
+    relation_creator_music,
+);
