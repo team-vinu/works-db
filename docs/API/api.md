@@ -56,4 +56,3 @@
   
 -   クリエイタ情報一覧
     - [ ]  `GET /api/creator/{creatorId}`
-    - [ ]  
