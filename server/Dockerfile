@@ -12,4 +12,6 @@ COPY . .
 
 RUN cargo install --locked --path .
 
-CMD [ "server" ]
+RUN cargo install diesel_cli --no-default-features --features postgres
+
+CMD sh -c "diesel migration run && server"
