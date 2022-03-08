@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   postgres:
-    build: ./
+    image: postgres:14.2
     restart: always
     networks:
       - db-tier
@@ -10,6 +10,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
   web:
     build: ./web
     restart: always
