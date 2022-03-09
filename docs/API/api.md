@@ -15,7 +15,7 @@
                 "note": "TVアニメ「アイカツ！」1年目前期ED主題歌"
             }
             ```
-    -   [ ] `delete_music` 削除 `DELETE /api/music/{musicId}`
+    -   [x] `delete_music` 削除 `DELETE /api/music/{musicId}`
     -   [x] `get_music` 取得 `GET /api/music/{musicId}`
 
 -   クリエイターを追加/削除
