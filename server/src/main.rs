@@ -15,6 +15,7 @@ async fn main() -> std::io::Result<()> {
             .service(router::get_musics)
             .service(router::post_music)
             .service(router::get_music)
+            .service(router::delete_music)
     })
     .bind("0.0.0.0:8080")?
     .run()

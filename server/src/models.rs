@@ -1,3 +1,4 @@
+#[allow(non_snake_case)]
 use crate::schema::music;
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
@@ -17,7 +18,6 @@ pub struct Music {
     pub note: Option<String>,
 }
 
-#[allow(non_snake_case)]
 #[derive(Deserialize, Serialize, Debug)]
 pub struct MusicInfo {
     pub name: String,

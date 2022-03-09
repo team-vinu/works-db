@@ -1,5 +1,6 @@
-use diesel::pg::PgConnection;
+#[allow(non_snake_case)]
 use diesel::prelude::*;
+use diesel::{dsl::exists, pg::PgConnection, result, select};
 use dotenv::dotenv;
 use std::env;
 use uuid::Uuid;
@@ -8,7 +9,7 @@ use crate::models::*;
 
 use crate::schema::music::dsl::*;
 
-use actix_web::{get, post, web, HttpResponse, Responder};
+use actix_web::{delete, get, http, post, web, HttpResponse, Responder};
 
 // db connection establishment
 fn establish_connection() -> PgConnection {
@@ -23,6 +24,19 @@ async fn get_musics() -> impl Responder {
     let conn = establish_connection();
     let results = music.load::<Music>(&conn).expect("Error loading music");
     return HttpResponse::Ok().body(format!("{:?}", results));
+}
+
+#[delete("/api/music/{musicId}")]
+async fn delete_music(web::Path(musicId): web::Path<Uuid>) -> impl Responder {
+    let conn = establish_connection();
+    let exist = music.filter(id.eq(musicId)).execute(&conn).unwrap(); // FIXME: unwrapを書きかえる
+    if let 0 = exist {
+        return HttpResponse::NotFound().body("Not exist");
+    }
+    diesel::delete(music.filter(id.eq(musicId)))
+        .execute(&conn)
+        .unwrap(); // FIXME: unwrapを書きかえる
+    return HttpResponse::Ok().body("succeeded");
 }
 
 #[post("/api/music")]
@@ -41,17 +55,21 @@ async fn post_music(req: web::Json<MusicInfo>) -> impl Responder {
     };
     diesel::insert_into(music)
         .values(&new_music)
-        .execute(&conn)
+        .get_result::<Music>(&conn)
         .unwrap();
-    return HttpResponse::Ok().body(format!("{:?}", req));
+    return HttpResponse::Ok()
+        .header(http::header::CONTENT_TYPE, "application/json")
+        .body(format!("{:?}", req));
 }
 
 #[get("/api/music/{musicId}")]
-async fn get_music(path: web::Path<(Uuid)>) -> impl Responder {
+async fn get_music(web::Path(musicId): web::Path<Uuid>) -> impl Responder {
     let conn = establish_connection();
     let result = music
-        .filter(id.eq(path.0))
+        .filter(id.eq(musicId))
         .load::<Music>(&conn)
         .expect("Error loading music");
-    return HttpResponse::Ok().body(format!("{:?}", result));
+    return HttpResponse::Ok()
+        .header(http::header::CONTENT_TYPE, "application/json")
+        .body(format!("{:?}", result));
 }
