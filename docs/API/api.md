@@ -6,7 +6,7 @@
     -   [ ] `GET /api/music/?creator=<creator-name>&role=<creator-role>`
 
 -   曲を DB に追加/削除
-    -   [x] 追加 `POST /api/music`
+    -   [x] `post_music` 追加 `POST /api/music`
         -   ```json
             {
                 "name": "カレンダーガール",
@@ -15,8 +15,8 @@
                 "note": "TVアニメ「アイカツ！」1年目前期ED主題歌"
             }
             ```
-    -   [ ] 削除 `DELETE /api/music/{musicId}`
-    -   [x] 取得 `GET /api/music/{musicId}`
+    -   [ ] `delete_music` 削除 `DELETE /api/music/{musicId}`
+    -   [x] `get_music` 取得 `GET /api/music/{musicId}`
 
 -   クリエイターを追加/削除
     -   [ ] 追加 `POST /api/creator/{creatorId}`
