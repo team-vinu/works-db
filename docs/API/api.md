@@ -21,7 +21,7 @@
 -   クリエイターを追加/削除
     -   [x] 追加 `POST /api/creator/`
     -   [ ] 削除 `DELETE /api/creator/{creatorId}`
-    -   [ ] 取得 `GET /api/creator/{creatorId}`
+    -   [x] 取得 `GET /api/creator/{creatorId}`
 
 -   楽曲-クリエイター関係に関係を追加/削除
     -   [ ] 追加 `POST /api/music/{musicId}/creator-relationship`

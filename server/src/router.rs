@@ -98,3 +98,15 @@ async fn post_creator(req: web::Json<CreatorInfo>) -> impl Responder {
         .header(http::header::CONTENT_TYPE, "application/json")
         .body(format!("{:?}", req));
 }
+
+#[get("/api/creator/{creatorId}}")]
+async fn get_creator(web::Path(creatorId): web::Path<Uuid>) -> impl Responder {
+    let conn = establish_connection();
+    let result = creator
+        .filter(creator_id.eq(creatorId))
+        .load::<Creator>(&conn)
+        .expect("Error loading music");
+    return HttpResponse::Ok()
+        .header(http::header::CONTENT_TYPE, "application/json")
+        .body(format!("{:?}", result));
+}
