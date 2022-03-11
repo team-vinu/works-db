@@ -19,9 +19,9 @@
     -   [x] `get_music` 取得 `GET /api/music/{musicId}`
 
 -   クリエイターを追加/削除
-    -   [x] 追加 `POST /api/creator/`
+    -   [x] `post_creator` 追加 `POST /api/creator/`
     -   [ ] 削除 `DELETE /api/creator/{creatorId}`
-    -   [x] 取得 `GET /api/creator/{creatorId}`
+    -   [x] `get_creator` 取得 `GET /api/creator/{creatorId}`
 
 -   楽曲-クリエイター関係に関係を追加/削除
     -   [ ] 追加 `POST /api/music/{musicId}/creator-relationship`
@@ -57,3 +57,7 @@
   
 -   クリエイタ情報一覧
     - [ ]  `GET /api/creator/{creatorId}`
+
+## 備考
+
+-   同一IPからの単位時間あたりのAPIアクセス(`POST/DELETE/PUT`)の制限かつ認証の有無
