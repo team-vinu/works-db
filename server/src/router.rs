@@ -7,8 +7,8 @@ use uuid::Uuid;
 
 use crate::models::*;
 
-use crate::schema::creator::dsl::*;
 use crate::schema::music::dsl::*;
+use crate::schema::person::dsl as PersonTable;
 
 use actix_web::{delete, get, http, post, web, HttpResponse, Responder};
 
@@ -43,17 +43,7 @@ async fn delete_music(web::Path(musicId): web::Path<Uuid>) -> impl Responder {
 #[post("/api/music")]
 async fn post_music(req: web::Json<MusicInfo>) -> impl Responder {
     let conn = establish_connection();
-    let new_music = Music {
-        music_id: Uuid::new_v4(),
-        name: req.name.clone(),
-        artist: req.artist.clone(),
-        release_date: req.release_date.clone(),
-        apple_music_url: req.apple_music_url.clone(),
-        spotify_url: req.spotify_url.clone(),
-        youtube_url: req.youtube_url.clone(),
-        songlink_url: req.songlink_url.clone(),
-        note: req.note.clone(),
-    };
+    let new_music = Music::new(&req);
     diesel::insert_into(music)
         .values(&new_music)
         .get_result::<Music>(&conn)
@@ -76,23 +66,12 @@ async fn get_music(web::Path(musicId): web::Path<Uuid>) -> impl Responder {
 }
 
 #[post("/api/creator")]
-async fn post_creator(req: web::Json<CreatorInfo>) -> impl Responder {
+async fn post_person(req: web::Json<PersonInfo>) -> impl Responder {
     let conn = establish_connection();
-    let new_creator = Creator {
-        creator_id: Uuid::new_v4(),
-        name: req.name.clone(),
-        genre: req.genre.clone(),
-        aka: req.aka.clone(),
-        url: req.url.clone(),
-        twitter_url: req.twitter_url.clone(),
-        apple_music_url: req.apple_music_url.clone(),
-        spotify_url: req.spotify_url.clone(),
-        youtube_url: req.youtube_url.clone(),
-        note: req.note.clone(),
-    };
-    diesel::insert_into(creator)
-        .values(&new_creator)
-        .get_result::<Creator>(&conn)
+    let new_person = Person::new(&req);
+    diesel::insert_into(PersonTable::person)
+        .values(new_person)
+        .get_result::<Person>(&conn)
         .unwrap();
     return HttpResponse::Ok()
         .header(http::header::CONTENT_TYPE, "application/json")
@@ -100,11 +79,11 @@ async fn post_creator(req: web::Json<CreatorInfo>) -> impl Responder {
 }
 
 #[get("/api/creator/{creatorId}}")]
-async fn get_creator(web::Path(creatorId): web::Path<Uuid>) -> impl Responder {
+async fn get_person(web::Path(personId): web::Path<Uuid>) -> impl Responder {
     let conn = establish_connection();
-    let result = creator
-        .filter(creator_id.eq(creatorId))
-        .load::<Creator>(&conn)
+    let result = PersonTable::person
+        .filter(PersonTable::person_id.eq(personId))
+        .load::<Person>(&conn)
         .expect("Error loading music");
     return HttpResponse::Ok()
         .header(http::header::CONTENT_TYPE, "application/json")

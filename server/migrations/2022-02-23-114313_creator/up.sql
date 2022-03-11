@@ -1,7 +1,7 @@
 -- Your SQL goes here
-CREATE TABLE creator
-("creator_id" uuid unique,
-"name" text not null,
+CREATE TABLE person
+("person_id" uuid unique,
+"person_name" text not null,
 "genre" text,
 "aka" text,
 "note" text,
@@ -10,4 +10,4 @@ CREATE TABLE creator
 "youtube_url" text,
 "apple_music_url" text,
 "spotify_url" text,
-PRIMARY KEY("creator_id"));
+PRIMARY KEY("person_id"));
