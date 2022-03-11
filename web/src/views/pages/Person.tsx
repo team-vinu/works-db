@@ -1,15 +1,14 @@
 import { Box, ChakraProvider, Heading } from '@chakra-ui/react';
-import CreatorProfile from '../components/Creator-profile';
-import defaultCreatorIcon from '../../images/user.png';
+import PersonProfile from '../components/person-profile';
 
-const Creator = (): JSX.Element => {
+const Person = (): JSX.Element => {
     return (
         <ChakraProvider>
             <Box m="8">
-                <CreatorProfile name="クリエイター" img={defaultCreatorIcon} />
+                <PersonProfile name="クリエイター" />
             </Box>
         </ChakraProvider>
     );
 };
 
-export default Creator;
+export default Person;

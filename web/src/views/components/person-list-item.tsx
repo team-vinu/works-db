@@ -1,7 +1,7 @@
 import { Text, HStack, Circle, Box } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-type Props = {
+export interface PersonListItemProps {
     key: string;
     personName: string;
     personImg: string;
@@ -9,7 +9,7 @@ type Props = {
     personLink: string;
 };
 
-const PersonListItem = (props: Props): JSX.Element => {
+export const PersonListItem = (props: PersonListItemProps): JSX.Element => {
     return (
         <Link to={props.personLink}>
             <HStack pb={3}>
@@ -23,4 +23,3 @@ const PersonListItem = (props: Props): JSX.Element => {
     );
 };
 
-export default PersonListItem;

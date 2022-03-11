@@ -1,19 +1,13 @@
 import { Image, Box, ChakraProvider, Heading, HStack } from '@chakra-ui/react';
-import SearchBox from '../components/Search-box';
-import CreatorList, { CreatorProps } from '../components/Creator-list';
+import SearchBox from '../components/search-box';
+import { PersonList } from '../components/person-list';
+import { PersonListItemProps } from '../components/person-list-item';
 import theme from '../../styles/theme'
 import DefaultCreatorIcon from '../../images/user.png';
 import logo from '../../images/works-db-logo.png'
 
 function Home() {
-    const pickupCreators: CreatorProps[] = [];
-    for (let i = 0; i < 10; i++) {
-        const creator: CreatorProps = {
-            name: 'creator',
-            img: DefaultCreatorIcon,
-        };
-        pickupCreators.push(creator);
-    }
+    const pickupCreators: PersonListItemProps[] = [];
 
     return (
         <ChakraProvider theme={theme}>
@@ -28,9 +22,9 @@ function Home() {
                     <SearchBox />
                 </Box>
 
-                <CreatorList
+                <PersonList
                     title="ピックアップ"
-                    creatorPropsArray={pickupCreators}
+                    personListItemPropsArray={pickupCreators}
                 />
             </Box>
         </ChakraProvider>

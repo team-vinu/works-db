@@ -1,18 +1,16 @@
 import { Image, Container, Heading } from "@chakra-ui/react";
-import CircleImage from "./Circle-image"
+import CircleImage from "./circle-image"
 
-interface CreatorProps {
+interface Props {
     name: string;
-    img: string;
 }
 
-const CreatorProfile = (props: CreatorProps) : JSX.Element => {
+const PersonProfile = (props: Props) : JSX.Element => {
     return (
         <Container centerContent>
-            <CircleImage src={props.img} boxSize="100px"/>
             <Heading>{props.name}</Heading>
         </Container>
     );
 };
 
-export default CreatorProfile;
+export default PersonProfile;

@@ -1,17 +1,12 @@
 import { Heading, Box, HStack } from '@chakra-ui/react';
-import CreatorListItem from './Creator-list-item';
-
-export interface CreatorProps {
-    name: string;
-    img: string;
-};
+import { PersonListItem, PersonListItemProps } from './person-list-item';
 
 interface Props {
     title: string;
-    creatorPropsArray: CreatorProps[];
+    personListItemPropsArray: PersonListItemProps[];
 };
 
-const CreatorList = (props: Props): JSX.Element => {
+export const PersonList = (props: Props): JSX.Element => {
     return (
         <Box>
             <Heading as="h2" size="sm">
@@ -20,12 +15,14 @@ const CreatorList = (props: Props): JSX.Element => {
             <HStack overflow="scroll">
                 {(() => {
                     const items = [];
-                    for (let i = 0; i < props.creatorPropsArray.length; i++) {
+                    for (let i = 0; i < props.personListItemPropsArray.length; i++) {
                         items.push(
-                            <CreatorListItem
+                            <PersonListItem
                                 key={i.toString()}
-                                name={props.creatorPropsArray[i].name}
-                                img={props.creatorPropsArray[i].img}
+                                personName={props.personListItemPropsArray[i].personName}
+                                personImg=''
+                                popularMusicTitle={[]}
+                                personLink='/creator'
                             />
                         );
                     }
@@ -35,5 +32,3 @@ const CreatorList = (props: Props): JSX.Element => {
         </Box>
     );
 };
-
-export default CreatorList;
