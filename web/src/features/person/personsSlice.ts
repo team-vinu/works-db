@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
 
-interface PersonSlice {
+export interface Person {
     uuid: string;
     name: string;
     mainGenre: string;
@@ -14,7 +14,7 @@ interface PersonSlice {
     spotifyUrl: string;
 }
 
-const initialState: PersonSlice = {
+const initialPersonState: Person = {
     uuid: '',
     name: 'name',
     mainGenre: 'main genre',
@@ -27,14 +27,22 @@ const initialState: PersonSlice = {
     spotifyUrl: '',
 };
 
-export const personSlice = createSlice({
-    name: 'person',
+interface PersonsState {
+    entities: Person[];
+}
+
+const initialState: PersonsState = {
+    entities: [initialPersonState],
+};
+
+export const personsSlice = createSlice({
+    name: 'persons',
     initialState,
     reducers: {},
 });
 
-export const {} = personSlice.actions;
+export const {} = personsSlice.actions;
 
-export const selectPerson = (state: RootState) => state.person.value;
+export const selectPersons = (state: RootState) => state.persons;
 
-export default personSlice.reducer;
+export default personsSlice.reducer;
