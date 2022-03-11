@@ -15,7 +15,7 @@ services:
     build: ./web
     restart: always
     volumes:
-      - ./web/dist:/app/dist
+      - ./web:/app
   server:
     build: ./server
     restart: always
