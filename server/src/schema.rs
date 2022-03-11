@@ -1,6 +1,6 @@
 table! {
-    creator (id) {
-        id -> Uuid,
+    creator (creator_id) {
+        creator_id -> Uuid,
         name -> Text,
         genre -> Nullable<Text>,
         aka -> Nullable<Text>,
@@ -14,8 +14,8 @@ table! {
 }
 
 table! {
-    music (id) {
-        id -> Uuid,
+    music (music_id) {
+        music_id -> Uuid,
         name -> Text,
         artist -> Nullable<Text>,
         release_date -> Nullable<Date>,

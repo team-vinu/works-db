@@ -1,6 +1,6 @@
 -- Your SQL goes here
 CREATE TABLE music
-("id" UUID UNIQUE,
+("music_id" UUID UNIQUE,
 "name" TEXT NOT NULL,
 "artist" TEXT,
 "release_date" DATE,
@@ -9,4 +9,4 @@ CREATE TABLE music
 "youtube_url" TEXT,
 "songlink_url" TEXT,
 "note" TEXT,
-PRIMARY KEY("id"));
+PRIMARY KEY("music_id"));

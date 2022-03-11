@@ -1,6 +1,6 @@
 -- Your SQL goes here
 CREATE TABLE creator
-("id" uuid unique,
+("creator_id" uuid unique,
 "name" text not null,
 "genre" text,
 "aka" text,
@@ -10,4 +10,4 @@ CREATE TABLE creator
 "youtube_url" text,
 "apple_music_url" text,
 "spotify_url" text,
-PRIMARY KEY("id"));
+PRIMARY KEY("creator_id"));
