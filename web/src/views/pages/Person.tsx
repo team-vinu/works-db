@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { Text, Box, ChakraProvider, Heading } from '@chakra-ui/react';
-import PersonProfile from '../components/person-profile';
+import { PersonProfile } from '../components';
 import { selectPersons } from '../../features/persons/personsSlice';
 
 export const Person = (): JSX.Element => {
