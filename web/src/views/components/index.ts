@@ -1,4 +1,5 @@
-export { CircleImage } from './circle-image';
-export { PersonListItem, type PersonListItemProps } from './person-list-item';
-export { PersonList } from './person-list';
-export { SearchBox } from './search-box';
+export { CircleImage } from './CircleImage';
+export { PersonListItem, type PersonListItemProps } from './PersonListItem';
+export { PersonList } from './PersonList';
+export { PersonProfile } from './PersonProfile';
+export { SearchBox } from './SearchBox';
