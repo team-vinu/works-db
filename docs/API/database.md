@@ -1,5 +1,8 @@
 # Database tables definitions
 
+## Data-types definition
+- PersonId/MusicID -> UUID_v4
+
 ## Creator
 
 ```rust
