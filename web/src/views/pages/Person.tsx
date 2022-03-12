@@ -1,9 +1,9 @@
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { Text, Box, ChakraProvider, Heading } from '@chakra-ui/react';
 import PersonProfile from '../components/person-profile';
-import { selectPersons } from '../../features/person/personsSlice';
+import { selectPersons } from '../../features/persons/personsSlice';
 
-const Person = (): JSX.Element => {
+export const Person = (): JSX.Element => {
     const persons = useAppSelector(selectPersons);
 
     return (
@@ -14,5 +14,3 @@ const Person = (): JSX.Element => {
         </ChakraProvider>
     );
 };
-
-export default Person;

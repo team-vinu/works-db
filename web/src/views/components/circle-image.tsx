@@ -5,10 +5,8 @@ interface Props {
     boxSize: string;
 }
 
-const CircleImage = (props: Props) : JSX.Element => {
+export const CircleImage = (props: Props) : JSX.Element => {
     return (
         <Image src={props.src} boxSize={props.boxSize} borderRadius="full" border="1px" />
     );
 }
-
-export default CircleImage;

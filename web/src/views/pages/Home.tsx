@@ -1,12 +1,9 @@
 import { Image, Box, ChakraProvider, Heading, HStack } from '@chakra-ui/react';
-import SearchBox from '../components/search-box';
-import { PersonList } from '../components/person-list';
-import { PersonListItemProps } from '../components/person-list-item';
+import { SearchBox, PersonList, PersonListItemProps } from '../components';
 import theme from '../../styles/theme'
-import DefaultCreatorIcon from '../../images/user.png';
 import logo from '../../images/works-db-logo.png'
 
-function Home() {
+export const Home = () : JSX.Element => {
     const pickupCreators: PersonListItemProps[] = [];
 
     return (
@@ -30,5 +27,3 @@ function Home() {
         </ChakraProvider>
     );
 }
-
-export default Home;

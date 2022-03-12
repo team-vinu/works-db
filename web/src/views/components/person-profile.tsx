@@ -1,5 +1,4 @@
-import { Image, Container, Heading } from "@chakra-ui/react";
-import CircleImage from "./circle-image"
+import { Container, Heading } from "@chakra-ui/react";
 
 interface Props {
     name: string;

@@ -1,7 +1,7 @@
 import { InputLeftElement, InputGroup, Box, Input, Button } from '@chakra-ui/react';
 import { SearchOutlined } from '@ant-design/icons'
 
-const SearchBox = (): JSX.Element => {
+export const SearchBox = (): JSX.Element => {
     return (
         <Box display="flex">
             <InputGroup>
@@ -18,5 +18,3 @@ const SearchBox = (): JSX.Element => {
         </Box>
     );
 };
-
-export default SearchBox;
