@@ -1,9 +1,10 @@
-import { Heading, Box, HStack } from '@chakra-ui/react';
-import { PersonListItem, PersonListItemProps } from './person-list-item';
+import { Heading, Box, HStack, VStack } from '@chakra-ui/react';
+import { PersonListItem, PersonListItemProps } from './';
+import { PersonList as PersonListInterface } from '../../app/slices/personListsSlice';
 
 interface Props {
     title: string;
-    personListItemPropsArray: PersonListItemProps[];
+    list: PersonListInterface;
 };
 
 export const PersonList = (props: Props): JSX.Element => {
@@ -12,14 +13,14 @@ export const PersonList = (props: Props): JSX.Element => {
             <Heading as="h2" size="sm">
                 {props.title}
             </Heading>
-            <HStack overflow="scroll">
+            <VStack>
                 {(() => {
                     const items = [];
-                    for (let i = 0; i < props.personListItemPropsArray.length; i++) {
+                    for (let i = 0; i < props.list.entities.length; i++) {
                         items.push(
                             <PersonListItem
                                 key={i.toString()}
-                                personName={props.personListItemPropsArray[i].personName}
+                                personName={props.list.entities[i].name}
                                 personImg=''
                                 popularMusicTitle={[]}
                                 personLink='/creator'
@@ -28,7 +29,7 @@ export const PersonList = (props: Props): JSX.Element => {
                     }
                     return items;
                 })()}
-            </HStack>
+            </VStack>
         </Box>
     );
 };

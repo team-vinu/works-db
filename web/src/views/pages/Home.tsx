@@ -1,29 +1,36 @@
-import { Image, Box, ChakraProvider, Heading, HStack } from '@chakra-ui/react';
+import { Image, Box, Heading, HStack } from '@chakra-ui/react';
 import { SearchBox, PersonList, PersonListItemProps } from '../components';
-import theme from '../../styles/theme'
+import { Main } from '../components/layout';
+import { 
+    Person, 
+    initialPersonState, 
+    selectPersonLists, 
+    PersonList as PersonListInterface, 
+    PersonLists as PersonListsInterface
+} from '../../app/slices/personListsSlice';
 import logo from '../../images/works-db-logo.png'
+import { useSelector } from 'react-redux';
 
 export const Home = () : JSX.Element => {
-    const pickupCreators: PersonListItemProps[] = [];
+    const personLists: PersonListsInterface = useSelector(selectPersonLists);
+    const pickupCreators: PersonListInterface = personLists.entities[0];
 
     return (
-        <ChakraProvider theme={theme}>
-            <Box m="8">
-                <Box mb="4">
-                    <HStack maxH='xl'>
-                        <Image src={logo} boxSize='50px' />
-                        <Heading as="h1" py="2">
-                            Works DB
-                        </Heading>
-                    </HStack>
-                    <SearchBox />
-                </Box>
-
-                <PersonList
-                    title="ピックアップ"
-                    personListItemPropsArray={pickupCreators}
-                />
+        <Main>
+            <Box mb="4">
+                <HStack maxH='xl'>
+                    <Image src={logo} boxSize='50px' />
+                    <Heading as="h1" py="2">
+                        Works DB desu
+                    </Heading>
+                </HStack>
+                <SearchBox />
             </Box>
-        </ChakraProvider>
+
+            <PersonList
+                title={pickupCreators.title}
+                list={pickupCreators}
+            />
+        </Main>
     );
 }

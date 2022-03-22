@@ -1,16 +1,14 @@
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { Text, Box, ChakraProvider, Heading } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 import { PersonProfile } from '../components';
-import { selectPersons } from '../../features/persons/personsSlice';
+import { selectPersonLists } from '../../app/slices/personListsSlice';
 
 export const Person = (): JSX.Element => {
-    const persons = useAppSelector(selectPersons);
+    const personLists = useAppSelector(selectPersonLists);
 
     return (
-        <ChakraProvider>
-            <Box m="8">
-                <PersonProfile name={persons.entities[0].name}/>
-            </Box>
-        </ChakraProvider>
+        <Box m="8">
+            <PersonProfile name={personLists.entities[0].entities[0].name}/>
+        </Box>
     );
 };
