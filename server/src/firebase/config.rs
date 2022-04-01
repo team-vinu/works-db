@@ -14,9 +14,8 @@ impl FireabaseConfig {
     pub fn new() -> FirebaseConfig {
         dotenv().ok;
 
-        let file = File::open("").unwrap(); //TODO: Firebase-admindsk.jsonのパス (dotenvを使う。環境変数のdoc)
-        let path = env::var("ADMIN_SDK_PATH").expect("ADMIN_SDK_PATH must be set");
-        let reader = BufReader::new(file);
+        let path = env::var("ADMIN_SDK_PATH").expect("ADMIN_SDK_PATH must be set"); // PATH: Firebase-adminsdk.json
+        let reader = BufReader::new(File::open(path).expect(format!("{} does not exist!", path)));
         let config: FireabaseConfig = serde_json::from_reader(reader).unwrap();
         return config;
     }
